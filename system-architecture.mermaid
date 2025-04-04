@@ -1,0 +1,61 @@
+flowchart TB
+    subgraph "Frontend Layer"
+        UI[Payload CMS 3.0 Frontend]
+        UIComponents[UI Components]
+        UIRouter[Routing]
+    end
+    
+    subgraph "Backend Layer"
+        API[Payload CMS 3.0 API]
+        Auth[Authentication]
+        MediaHandling[Media Processing]
+        PaymentIntegration[Payment Gateway]
+        EmailService[Email Service]
+    end
+    
+    subgraph "Data Layer"
+        DB[(PostgreSQL)]
+        Storage[AWS S3 Storage]
+    end
+    
+    subgraph "AI Services"
+        LLM[LLM API]
+        Recommender[Recommendation Engine]
+        ContentAnalyzer[Content Analysis]
+    end
+    
+    subgraph "External Services"
+        YouTube[YouTube API]
+        Payment[Payment Processor]
+    end
+    
+    subgraph "Hosting"
+        Railway[Railway Hosting]
+        AWS[AWS Services]
+    end
+    
+    UI --> UIComponents
+    UI --> UIRouter
+    UIComponents --> API
+    UIRouter --> API
+    
+    API --> Auth
+    API --> MediaHandling
+    API --> PaymentIntegration
+    API --> EmailService
+    
+    Auth --> DB
+    MediaHandling --> Storage
+    PaymentIntegration --> Payment
+    API --> DB
+    
+    API --> LLM
+    API --> Recommender
+    API --> ContentAnalyzer
+    
+    MediaHandling --> YouTube
+    
+    DB --> AWS
+    Storage --> AWS
+    API --> Railway
+    UI --> Railway

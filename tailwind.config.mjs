@@ -1,8 +1,7 @@
-import tailwindcssAnimate from 'tailwindcss-animate'
-import typography from '@tailwindcss/typography'
-
+/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable import/no-anonymous-default-export */
 /** @type {import('tailwindcss').Config} */
-const config = {
+export default {
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -10,7 +9,7 @@ const config = {
     './src/**/*.{ts,tsx}',
   ],
   darkMode: ['selector', '[data-theme="dark"]'],
-  plugins: [tailwindcssAnimate, typography],
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
   prefix: '',
   safelist: [
     'lg:col-span-4',
@@ -37,13 +36,13 @@ const config = {
         sm: '1rem',
         xl: '2rem',
       },
-      screens: {
-        '2xl': '86rem',
-        lg: '64rem',
-        md: '48rem',
-        sm: '40rem',
-        xl: '80rem',
-      },
+      // screens: {
+      //   '2xl': '86rem',
+      //   lg: '64rem',
+      //   md: '48rem',
+      //   sm: '40rem',
+      //   xl: '80rem',
+      // },
     },
     extend: {
       animation: {
@@ -56,46 +55,68 @@ const config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
+        background: {
+          DEFAULT: 'var(--background)',
+          light: '#ffffff',
+          dark: '#0c0c0c',
         },
-        background: 'hsl(var(--background))',
-        border: 'hsla(var(--border))',
+        foreground: {
+          DEFAULT: 'var(--foreground)',
+          light: '#0c0c0c',
+          dark: '#ffffff',
+        },
         card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
-        },
-        foreground: 'hsl(var(--foreground))',
-        input: 'hsl(var(--input))',
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
+          DEFAULT: 'var(--card)',
+          light: '#f5f5f5',
+          dark: '#1e1e1e',
         },
         popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
+          DEFAULT: 'var(--popover)',
+          light: '#ffffff',
+          dark: '#1e1e1e',
         },
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: 'var(--primary)',
+          light: '#00b4a2',
+          dark: '#00b4a2',
         },
-        ring: 'hsl(var(--ring))',
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+        accent: {
+          DEFAULT: 'var(--accent)',
+          light: '#ffdd00',
+          dark: '#ffdd00',
         },
-        success: 'hsl(var(--success))',
-        error: 'hsl(var(--error))',
-        warning: 'hsl(var(--warning))',
+        muted: {
+          DEFAULT: 'var(--muted)',
+          light: '#666666',
+          dark: '#cccccc',
+        },
+        destructive: {
+          DEFAULT: 'var(--destructive)',
+          light: '#e53e3e',
+          dark: '#ff4d4d',
+        },
+        border: {
+          // Correct naming for border colors
+          DEFAULT: 'var(--border)',
+          light: '#e0e0e0',
+          dark: '#00b4a2',
+        },
+        input: {
+          DEFAULT: 'var(--input)',
+          light: '#f5f5f5',
+          dark: '#1e1e1e',
+        },
+        ring: {
+          DEFAULT: 'var(--ring)',
+          light: '#ffdd00',
+          dark: '#ffdd00',
+        },
       },
       fontFamily: {
-        mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
+        sans: ['Roboto', 'sans-serif'], // Use your chosen font
+        anton: ['Anton', 'sans-serif'],
+        londrina: ['Londrina', 'sans-serif'],
+        pacifico: ['Pacifico', 'sans-serif'],
       },
       keyframes: {
         'accordion-down': {
@@ -107,7 +128,7 @@ const config = {
           to: { height: '0' },
         },
       },
-      typography: () => ({
+      typography: ({ theme }) => ({
         DEFAULT: {
           css: [
             {
@@ -149,5 +170,3 @@ const config = {
     },
   },
 }
-
-export default config

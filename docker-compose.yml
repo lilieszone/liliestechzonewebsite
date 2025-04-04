@@ -1,31 +1,21 @@
-version: '3'
-
 services:
-  payload:
-    image: node:18-alpine
-    ports:
-      - '3000:3000'
+  db:
+    image: postgres
+    restart: always
     volumes:
-      - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
-    working_dir: /home/node/app/
-    command: sh -c "yarn install && yarn dev"
-    depends_on:
-      - mongo
-    env_file:
-      - .env
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=liliesTechZone
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - 5432:5432
 
-  mongo:
-    image: mongo:latest
+  adminer:
+    image: adminer
+    restart: always
     ports:
-      - '27017:27017'
-    command:
-      - --storageEngine=wiredTiger
-    volumes:
-      - data:/data/db
-    logging:
-      driver: none
+      - 8081:8080
 
 volumes:
-  data:
-  node_modules:
+  postgres_data:

@@ -25,6 +25,19 @@ export const Header: GlobalConfig = {
         },
       },
     },
+    {
+      name: 'logoImage',
+      type: 'upload',
+      label: 'Logo Image',
+      relationTo: 'media',
+      required: false,
+    },
+    {
+      name: 'siteTitle',
+      type: 'text',
+      label: 'Website Title',
+      defaultValue: 'Clear Result Consult',
+    },
   ],
   hooks: {
     afterChange: [revalidateHeader],
