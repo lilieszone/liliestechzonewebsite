@@ -398,7 +398,12 @@ export interface Category {
  */
 export interface User {
   id: number;
-  name?: string | null;
+  role: 'admin' | 'editor' | 'subscriber';
+  firstName: string;
+  lastName: string;
+  gender?: ('male' | 'female') | null;
+  phoneNumber?: string | null;
+  newsletter?: boolean | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -406,6 +411,8 @@ export interface User {
   resetPasswordExpiration?: string | null;
   salt?: string | null;
   hash?: string | null;
+  _verified?: boolean | null;
+  _verificationToken?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
@@ -1290,7 +1297,12 @@ export interface CategoriesSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  name?: T;
+  role?: T;
+  firstName?: T;
+  lastName?: T;
+  gender?: T;
+  phoneNumber?: T;
+  newsletter?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -1298,6 +1310,8 @@ export interface UsersSelect<T extends boolean = true> {
   resetPasswordExpiration?: T;
   salt?: T;
   hash?: T;
+  _verified?: T;
+  _verificationToken?: T;
   loginAttempts?: T;
   lockUntil?: T;
 }
