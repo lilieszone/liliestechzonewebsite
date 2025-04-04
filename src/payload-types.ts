@@ -7,6 +7,31 @@
  */
 
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socialMenu".
+ */
+export type SocialMenu =
+  | {
+      title: string;
+      link: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?:
+          | ({
+              relationTo: 'pages';
+              value: number | Page;
+            } | null)
+          | ({
+              relationTo: 'posts';
+              value: number | Post;
+            } | null);
+        url?: string | null;
+        label: string;
+      };
+      id?: string | null;
+    }[]
+  | null;
+/**
  * Supported timezones in IANA format.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1587,6 +1612,7 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
+  providers?: SocialMenu;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1634,9 +1660,27 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  providers?: T | SocialMenuSelect<T>;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socialMenu_select".
+ */
+export interface SocialMenuSelect<T extends boolean = true> {
+  title?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

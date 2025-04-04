@@ -25,6 +25,29 @@ export const Footer: GlobalConfig = {
         },
       },
     },
+    {
+      name: 'providers',
+      type: 'array',
+      label: 'social media providers',
+      minRows: 1,
+      maxRows: 10,
+      interfaceName: 'socialMenu',
+      labels: {
+        singular: 'social-media-provider',
+        plural: 'social-media-providers',
+      },
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          label: 'provider',
+          required: true,
+        },
+        link({
+          appearances: false,
+        }),
+      ],
+    },
   ],
   hooks: {
     afterChange: [revalidateFooter],
