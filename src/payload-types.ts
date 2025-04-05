@@ -302,6 +302,35 @@ export interface Page {
         blockName?: string | null;
         blockType: 'featList';
       }
+    | {
+        /**
+         * Small text above the main heading, e.g., "DON'T JUST TAKE OUR WORD FOR IT".
+         */
+        eyebrow?: string | null;
+        /**
+         * Main heading for the testimonials section.
+         */
+        heading?: string | null;
+        /**
+         * Add individual testimonials here.
+         */
+        testimonials: {
+          companyLogo?: (number | null) | Media;
+          testimonialText: string;
+          authorImage?: (number | null) | Media;
+          authorName: string;
+          authorTitle: string;
+          /**
+           * Adds a distinct border/style (like the purple border example).
+           */
+          highlightCard?: boolean | null;
+          id?: string | null;
+        }[];
+        backgroundColor?: ('transparent' | 'white' | 'gray-50' | 'blue-50') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'testimonials';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -1191,6 +1220,26 @@ export interface PagesSelect<T extends boolean = true> {
                         };
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        testimonials?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              testimonials?:
+                | T
+                | {
+                    companyLogo?: T;
+                    testimonialText?: T;
+                    authorImage?: T;
+                    authorName?: T;
+                    authorTitle?: T;
+                    highlightCard?: T;
+                    id?: T;
+                  };
+              backgroundColor?: T;
               id?: T;
               blockName?: T;
             };
