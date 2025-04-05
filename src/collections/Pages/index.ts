@@ -22,6 +22,7 @@ import { anyone, onlyAdmin } from '@/access/authentications'
 import { IconsBlock } from '@/blocks/IconsBlock/config'
 import { FeatureListBlock } from '@/blocks/FeatureListBlock/config'
 import { TestimonialsBlock } from '@/blocks/Testimonials/config'
+import { PricingBlock } from '@/blocks/Pricing/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -86,6 +87,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 IconsBlock,
                 FeatureListBlock,
                 TestimonialsBlock,
+                PricingBlock,
               ],
               required: true,
               admin: {

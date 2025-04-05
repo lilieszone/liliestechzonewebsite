@@ -331,6 +331,79 @@ export interface Page {
         blockName?: string | null;
         blockType: 'testimonials';
       }
+    | {
+        /**
+         * Small text above the main heading.
+         */
+        eyebrow?: string | null;
+        /**
+         * Main heading for the pricing section.
+         */
+        heading?: string | null;
+        /**
+         * The portion of the heading that will be highlighted with a different color.
+         */
+        highlightedText?: string | null;
+        /**
+         * Descriptive text below the heading.
+         */
+        subtitle?: string | null;
+        monthlyLabel?: string | null;
+        yearlyLabel?: string | null;
+        popularLabel?: string | null;
+        buttonText?: string | null;
+        /**
+         * Add individual pricing plans here.
+         */
+        plans: {
+          /**
+           * E.g., Basic, Pro, Enterprise
+           */
+          type: string;
+          /**
+           * E.g., Best for personal use.
+           */
+          tagline: string;
+          /**
+           * Price in dollars, leave empty for custom pricing.
+           */
+          monthlyPrice?: number | null;
+          /**
+           * Price in dollars, leave empty for custom pricing.
+           */
+          yearlyPrice?: number | null;
+          /**
+           * Text to display after the price, e.g., "/ mo".
+           */
+          priceSuffix?: string | null;
+          description?: string | null;
+          /**
+           * Label to show for custom pricing (e.g., for Enterprise plan).
+           */
+          customPriceLabel?: string | null;
+          /**
+           * Check this for plans with custom pricing (e.g., Enterprise).
+           */
+          isCustomPricing?: boolean | null;
+          /**
+           * Mark this plan as the most popular option.
+           */
+          isPopular?: boolean | null;
+          /**
+           * Features included or not included in this plan.
+           */
+          features: {
+            text: string;
+            included?: boolean | null;
+            id?: string | null;
+          }[];
+          id?: string | null;
+        }[];
+        backgroundColor?: ('transparent' | 'white' | 'gray-50' | 'blue-50') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'pricing';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -1237,6 +1310,42 @@ export interface PagesSelect<T extends boolean = true> {
                     authorName?: T;
                     authorTitle?: T;
                     highlightCard?: T;
+                    id?: T;
+                  };
+              backgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+        pricing?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              highlightedText?: T;
+              subtitle?: T;
+              monthlyLabel?: T;
+              yearlyLabel?: T;
+              popularLabel?: T;
+              buttonText?: T;
+              plans?:
+                | T
+                | {
+                    type?: T;
+                    tagline?: T;
+                    monthlyPrice?: T;
+                    yearlyPrice?: T;
+                    priceSuffix?: T;
+                    description?: T;
+                    customPriceLabel?: T;
+                    isCustomPricing?: T;
+                    isPopular?: T;
+                    features?:
+                      | T
+                      | {
+                          text?: T;
+                          included?: T;
+                          id?: T;
+                        };
                     id?: T;
                   };
               backgroundColor?: T;
