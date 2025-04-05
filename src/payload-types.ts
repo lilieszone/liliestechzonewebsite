@@ -128,10 +128,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    partners: Partner;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    partners: PartnersSelect<false> | PartnersSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1632,6 +1634,30 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners".
+ */
+export interface Partner {
+  id: number;
+  partnerList: {
+    /**
+     * Upload the partner's logo.
+     */
+    logo: number | Media;
+    /**
+     * Enter the name of the partner.
+     */
+    title: string;
+    /**
+     * Enter the full URL to the partner's website (e.g., https://example.com).
+     */
+    link?: string | null;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1695,6 +1721,23 @@ export interface SocialMenuSelect<T extends boolean = true> {
         label?: T;
       };
   id?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners_select".
+ */
+export interface PartnersSelect<T extends boolean = true> {
+  partnerList?:
+    | T
+    | {
+        logo?: T;
+        title?: T;
+        link?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

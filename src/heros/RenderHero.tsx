@@ -5,6 +5,7 @@ import type { Page } from '@/payload-types'
 import { HighImpactHero } from '@/heros/HighImpact'
 import { LowImpactHero } from '@/heros/LowImpact'
 import { MediumImpactHero } from '@/heros/MediumImpact'
+import { PartnersComponent } from '@/Partners/PartnersComponent'
 
 const heroes = {
   highImpact: HighImpactHero,
@@ -21,5 +22,12 @@ export const RenderHero: React.FC<Page['hero']> = (props) => {
 
   if (!HeroToRender) return null
 
-  return <HeroToRender {...props} />
+  return (
+    <div>
+      <HeroToRender {...props} />
+      <div className="relative">
+        <PartnersComponent />
+      </div>
+    </div>
+  )
 }
