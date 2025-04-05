@@ -19,6 +19,8 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { anyone, onlyAdmin } from '@/access/authentications'
+import { IconsBlock } from '@/blocks/IconsBlock/config'
+import { FeatureListBlock } from '@/blocks/FeatureListBlock/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -74,7 +76,15 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                FormBlock,
+                IconsBlock,
+                FeatureListBlock,
+              ],
               required: true,
               admin: {
                 initCollapsed: true,

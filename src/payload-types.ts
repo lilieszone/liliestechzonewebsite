@@ -218,7 +218,91 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | {
+        heading?: string | null;
+        features?:
+          | {
+              /**
+               * Enter icon name from react-icons. Examples: Heroicons (HiOutlineLightBulb, HiChartBar), Font Awesome (FaBolt, FaStar), Material Design (MdSettings, MdAccessAlarm), Feather (FiCamera, FiCpu). Ensure the name matches the selected library.
+               */
+              iconName: string;
+              /**
+               * Enter hex color code or CSS color name (e.g., #ff0000 or red).
+               */
+              iconColor?: string | null;
+              /**
+               * Select the icon library. The Icon Name must belong to this library.
+               */
+              iconLibrary: 'hi' | 'fa' | 'md' | 'fi';
+              title: string;
+              description: string;
+              id?: string | null;
+            }[]
+          | null;
+        backgroundColor?: ('white' | 'gray-50' | 'blue-50') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'iconsBlock';
+      }
+    | {
+        imageCfg: {
+          image: number | Media;
+          imagePosition?: ('left' | 'right') | null;
+        };
+        status?: {
+          showStatusIcon?: boolean | null;
+          /**
+           * e.g., CURRENTLY AVAILABLE FOR WORK
+           */
+          text?: string | null;
+        };
+        /**
+         * The main title text.
+         */
+        title: string;
+        /**
+         * Enter the exact part of the title you want to highlight (e.g., "Everything You Need."). This part will be colored.
+         */
+        titleHighlightText: string;
+        features: {
+          featureText: string;
+          id?: string | null;
+        }[];
+        links?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: number | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: number | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+                /**
+                 * Choose how the link should be rendered.
+                 */
+                appearance?: ('default' | 'outline') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featList';
+      }
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -1051,6 +1135,65 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        iconsBlock?:
+          | T
+          | {
+              heading?: T;
+              features?:
+                | T
+                | {
+                    iconName?: T;
+                    iconColor?: T;
+                    iconLibrary?: T;
+                    title?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              backgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featList?:
+          | T
+          | {
+              imageCfg?:
+                | T
+                | {
+                    image?: T;
+                    imagePosition?: T;
+                  };
+              status?:
+                | T
+                | {
+                    showStatusIcon?: T;
+                    text?: T;
+                  };
+              title?: T;
+              titleHighlightText?: T;
+              features?:
+                | T
+                | {
+                    featureText?: T;
+                    id?: T;
+                  };
+              links?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
