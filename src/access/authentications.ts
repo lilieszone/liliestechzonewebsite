@@ -36,7 +36,12 @@ export const adminOrSelf = ({ req: { user }, id }: AccessArgs) => {
   if (user?.role === 'admin') {
     return true
   }
-  return user?.id === id // only if a document ID is present
+  return {
+    id: {
+      equals: user?.id,
+    },
+  }
+  return false
 }
 
 export const onlyAdmin = ({ req: { user } }: AccessArgs) => {

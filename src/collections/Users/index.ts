@@ -44,6 +44,7 @@ export const Users: CollectionConfig = {
     {
       name: 'role',
       type: 'select',
+      saveToJWT: true,
       options: ['admin', 'editor', 'subscriber'],
       access: {
         create: canUpdateRole,
