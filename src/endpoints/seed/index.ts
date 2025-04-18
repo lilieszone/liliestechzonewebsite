@@ -46,6 +46,7 @@ export const seed = async ({
       payload.updateGlobal({
         slug: global,
         data: {
+          //@ts-expect-error fix later
           navItems: [],
         },
         depth: 0,
@@ -99,8 +100,10 @@ export const seed = async ({
     payload.create({
       collection: 'users',
       data: {
-        name: 'Demo Author',
+        firstName: 'Demo Author',
+        lastName: 'author',
         email: 'demo-author@example.com',
+        role: 'editor',
         password: 'password',
       },
     }),
@@ -288,20 +291,122 @@ export const seed = async ({
       data: {
         navItems: [
           {
-            link: {
-              type: 'custom',
-              label: 'Posts',
-              url: '/posts',
+            navLink: {
+              link: {
+                type: 'custom',
+                label: 'Posts',
+                url: '/posts',
+              },
+              hasDropdown: false,
             },
           },
           {
-            link: {
-              type: 'reference',
-              label: 'Contact',
-              reference: {
-                relationTo: 'pages',
-                value: contactPage.id,
+            navLink: {
+              link: {
+                type: 'custom',
+                label: 'Product',
+                url: '/product',
               },
+              hasDropdown: true,
+              ddContent: {
+                header: {
+                  root: {
+                    type: 'root',
+                    indent: 0,
+                    direction: null,
+                    format: '',
+                    version: 1,
+                    children: [
+                      {
+                        type: 'heading',
+                        tag: 'h4',
+                        direction: null,
+                        format: '',
+                        indent: 0,
+                        version: 1,
+                        children: [
+                          {
+                            mode: 'normal',
+                            text: 'Explore Payload Features',
+                            type: 'text',
+                            version: 1,
+                            style: '',
+                            detail: 0,
+                            format: 0,
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+                links: [
+                  { link: { type: 'custom', label: 'Core Features', url: '/features/core' } },
+                  { link: { type: 'custom', label: 'Plugins', url: '/features/plugins' } },
+                  { link: { type: 'custom', label: 'Cloud', url: '/features/cloud' } },
+                ],
+                footer: {
+                  root: {
+                    type: 'root',
+                    indent: 0,
+                    direction: null,
+                    format: '',
+                    version: 1,
+                    children: [
+                      {
+                        type: 'paragraph',
+                        direction: null,
+                        format: '',
+                        indent: 0,
+                        version: 1,
+                        children: [
+                          {
+                            mode: 'normal',
+                            text: 'Need help? ',
+                            type: 'text',
+                            version: 1,
+                            style: '',
+                            detail: 0,
+                            format: 1,
+                          },
+                          {
+                            mode: 'normal',
+                            text: 'Visit our support center.',
+                            type: 'text',
+                            version: 1,
+                            style: '',
+                            detail: 0,
+                            format: 0,
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+                ftCnt: {
+                  title: 'Payload 3.0 Live!',
+                  description:
+                    'Discover the latest enhancements and features in our newest version.',
+                  image: image1Doc.id,
+                  link: {
+                    type: 'custom',
+                    label: 'Learn More',
+                    url: '/payload-3',
+                  },
+                },
+              },
+            },
+          },
+          {
+            navLink: {
+              link: {
+                type: 'reference',
+                label: 'Contact',
+                reference: {
+                  relationTo: 'pages',
+                  value: contactPage.id,
+                },
+              },
+              hasDropdown: false,
             },
           },
         ],

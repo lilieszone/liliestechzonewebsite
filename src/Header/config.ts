@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
 import { link } from '@/fields/link'
+import { navDropdownLink } from '@/fields/navDropdownLink'
 import { revalidateHeader } from './hooks/revalidateHeader'
 
 export const Header: GlobalConfig = {
@@ -13,7 +14,7 @@ export const Header: GlobalConfig = {
       name: 'navItems',
       type: 'array',
       fields: [
-        link({
+        navDropdownLink({
           appearances: false,
         }),
       ],
