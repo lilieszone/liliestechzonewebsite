@@ -1,143 +1,86 @@
 'use client'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
+import { Menu as MenuIcon, Search as SearchIcon, X as CloseIcon } from 'lucide-react'
 
-import type { Header } from '@/payload-types'
+import type { Header as HeaderType } from '@/payload-types'
 
 import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
 import { Button } from '@/components/ui/button'
-import { Menu, MenuIcon, SearchIcon } from 'lucide-react'
+import { MobileNav } from './MobileNav'
 
 interface HeaderClientProps {
-  data: Header
+  data: HeaderType
 }
 
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
-  /* Storing the value in a useState to avoid hydration errors */
   const [theme, setTheme] = useState<'dark' | 'light'>('light')
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
-  const pathname = usePathname()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false) // State for mobile menu
-  const menuRef = useRef<HTMLDivElement | null>(null) // Create a ref for the mobile menu
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const headerRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     setHeaderTheme(null)
-  }, [pathname])
+  }, [setHeaderTheme])
 
   useEffect(() => {
     if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerTheme])
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-      setIsMobileMenuOpen(false)
-    }
-  }
-
-  const handleScroll = () => {
-    setIsMobileMenuOpen(false)
-  }
-
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.addEventListener('click', handleClickOutside)
-      window.addEventListener('scroll', handleScroll)
-    } else {
-      document.removeEventListener('click', handleClickOutside)
-      window.removeEventListener('scroll', handleScroll)
-    }
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside)
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [isMobileMenuOpen])
+  }, [headerTheme, theme])
 
   return (
-    <header className="flex justify-between py-4 px-2 sm:px-8 lg:px-12 relative">
-      <div className="flex items-center justify-between relative">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-50 flex justify-between items-center py-4 px-4 sm:px-8 lg:px-12 bg-background border-b border-border dark:border-muted-foreground/30"
+    >
+      <div className="flex items-center">
         <Link className="flex items-center" href="/">
           <Logo
             loading="eager"
             priority="high"
-            className=" dark:invert-0 h-[60px] sm:h-auto"
+            className="dark:invert-0 h-[40px] w-auto"
             theme={theme}
-            //@ts-expect-error ignore logoImage
+            //@ts-expect-error logoImage is defined
             logoImage={data?.logoImage}
           />
-          <h1 className="ml-2 font-pacifico text-lg ">{data?.siteTitle}</h1>
+          <h1 className="ml-2 font-semibold text-lg hidden sm:block">{data?.siteTitle}</h1>
         </Link>
       </div>
 
-      {/* Desktop Navigation */}
-      <div className="hidden sm:flex">
+      <div className="hidden lg:flex flex-grow justify-center">
         <HeaderNav data={data} />
       </div>
 
-      <div className="hidden sm:flex gap-2 justify-between items-center">
+      <div className="hidden lg:flex gap-2 items-center">
         <Link href="/search">
-          <Button variant="secondary" size="sm" className="rounded-xl">
-            <SearchIcon className="mr-2" />
-            <span>Search</span>
+          <Button variant="ghost" size="icon" aria-label="Search">
+            <SearchIcon className="h-5 w-5" />
           </Button>
         </Link>
         <Link href="/auth/login">
-          <Button variant="outline" size="sm" className="rounded-xl">
+          <Button variant="outline" size="sm">
             Get Started
           </Button>
         </Link>
       </div>
 
-      {/* Mobile Navigation */}
       <button
-        className="sm:hidden text-primary-foreground hover:text-secondary  focus:outline-none"
+        className="lg:hidden text-foreground hover:text-primary focus:outline-none p-2 -mr-2"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={isMobileMenuOpen}
+        aria-controls="mobile-menu"
       >
-        {/* Hamburger Icon */}
-        <MenuIcon className="w-6 h-6" />
+        {isMobileMenuOpen ? <CloseIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
       </button>
 
-      {/* Mobile Menu Content */}
-      {isMobileMenuOpen && (
-        <div
-          ref={menuRef} // Attach the ref to the mobile menu
-          className="absolute top-12 right-0 w-48 bg-white dark:bg-black dark:text-white shadow-md rounded-md z-50"
-        >
-          <ul className="py-2">
-            {data.navItems?.map((item) => (
-              <li key={item.id}>
-                <Link
-                  href={item.link?.url || ''}
-                  className="block px-4 py-2 "
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.link.label} {/* Access label from item.link */}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="flex flex-col sm:hidden py-3">
-            <div>
-              <Link href="/search">
-                <Button variant="ghost" size="sm">
-                  <SearchIcon className="w-4 h-4 mr-2" />
-                  <span>Search</span>
-                  {/* Add icon */}
-                </Button>
-              </Link>
-              <Link href="/auth/login">
-                <Button variant="outline" size="sm">
-                  Login
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
+      <MobileNav
+        isOpen={isMobileMenuOpen}
+        setIsOpen={setIsMobileMenuOpen}
+        navItems={data.navItems}
+        headerRef={headerRef}
+      />
     </header>
   )
 }

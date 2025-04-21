@@ -48,3 +48,12 @@
   - Created `src/blocks/Pricing/Component.tsx` to render the pricing plans with styling and Framer Motion animations.
   - Implemented toggle functionality for monthly/yearly pricing and hover effects for highlighted cards.
   - Registered `PricingBlock` in `payload.config.ts`.
+
+## 2024-04-08
+
+- **Header Navigation (`HeaderNav`):**
+  - Implemented active link indicator using an animated underline pseudo-element.
+  - Refined dropdown toggle logic:
+    - Added `useEffect` hook with `useRef` for toggle buttons and dropdown content to handle click-outside dismissal.
+    - Ensured clicking the toggle button again correctly closes the dropdown.
+  - Cleaned up component markup and state management.
