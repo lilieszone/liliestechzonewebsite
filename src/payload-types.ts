@@ -436,6 +436,7 @@ export interface Page {
         blockName?: string | null;
         blockType: 'testimonials';
       }
+    | FoqBlock
   )[];
   meta?: {
     title?: string | null;
@@ -642,6 +643,8 @@ export interface User {
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
+  title?: string | null;
+  ctaImage?: (number | null) | Media;
   richText?: {
     root: {
       type: string;
@@ -978,6 +981,59 @@ export interface Form {
     | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "foqBlock".
+ */
+export interface FoqBlock {
+  title: string;
+  question: {
+    Question: string;
+    answer?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1387,6 +1443,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        faq?: T | FoqBlockSelect<T>;
       };
   meta?:
     | T
@@ -1407,6 +1464,8 @@ export interface PagesSelect<T extends boolean = true> {
  * via the `definition` "CallToActionBlock_select".
  */
 export interface CallToActionBlockSelect<T extends boolean = true> {
+  title?: T;
+  ctaImage?: T;
   richText?: T;
   links?:
     | T
@@ -1483,6 +1542,37 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "foqBlock_select".
+ */
+export interface FoqBlockSelect<T extends boolean = true> {
+  title?: T;
+  question?:
+    | T
+    | {
+        Question?: T;
+        answer?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

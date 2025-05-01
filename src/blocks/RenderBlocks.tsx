@@ -11,6 +11,7 @@ import { IconsBlock } from './IconsBlock/Component'
 import { FeatureListBlockComponent } from './FeatureListBlock/Component'
 import { TestimonialsBlockComponent } from './Testimonials/Component'
 import PricingBlockComponent from './Pricing/Component'
+import { FaqBlockComponent } from './FOQ/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -22,6 +23,7 @@ const blockComponents = {
   featList: FeatureListBlockComponent,
   testimonials: TestimonialsBlockComponent,
   pricing: PricingBlockComponent,
+  faq: FaqBlockComponent,
 }
 
 export const RenderBlocks: React.FC<{

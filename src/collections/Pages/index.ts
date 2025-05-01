@@ -24,6 +24,7 @@ import { TestimonialsBlock } from '@/blocks/Testimonials/config'
 import { PricingBlock } from '@/blocks/Pricing/config'
 import { onlyAdmins } from '@/access/onlyAdmins'
 import { anyone } from '@/access/anyone'
+import { FAQS } from '@/blocks/FOQ/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -90,6 +91,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 TestimonialsBlock,
                 PricingBlock,
                 TestimonialsBlock,
+                FAQS,
               ],
               required: true,
               admin: {

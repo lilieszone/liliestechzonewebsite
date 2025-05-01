@@ -14,6 +14,18 @@ export const CallToAction: Block = {
   interfaceName: 'CallToActionBlock',
   fields: [
     {
+      name: 'title',
+      type: 'text',
+      defaultValue: 'Call to Action',
+      required: false,
+    },
+    {
+      name: 'ctaImage',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
+    },
+    {
       name: 'richText',
       type: 'richText',
       editor: lexicalEditor({

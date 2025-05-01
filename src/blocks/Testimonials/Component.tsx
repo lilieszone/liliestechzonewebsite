@@ -73,7 +73,7 @@ export const TestimonialsBlockComponent: React.FC<TestimonialsBlockProps> = ({
   const bgClass = backgroundColor !== 'transparent' ? `bg-${backgroundColor}` : ''
 
   return (
-    <section className={clsx('py-16 md:py-24', bgClass)}>
+    <section className={clsx('py-16 md:py-24')}>
       <div className="container mx-auto px-4">
         {/* Optional Section Heading */}
         {(eyebrow || heading) && (
