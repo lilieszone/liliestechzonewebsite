@@ -1,5 +1,4 @@
 'use client'
-import { useHeaderTheme } from '@/providers/HeaderTheme'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import { Menu as MenuIcon, Search as SearchIcon, X as CloseIcon } from 'lucide-react'
@@ -10,24 +9,15 @@ import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
 import { Button } from '@/components/ui/button'
 import { MobileNav } from './MobileNav'
+import { themeLocalStorageKey } from '@/providers/Theme/shared'
 
 interface HeaderClientProps {
   data: HeaderType
 }
 
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
-  const [theme, setTheme] = useState<'dark' | 'light'>('light')
-  const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const headerRef = useRef<HTMLElement | null>(null)
-
-  useEffect(() => {
-    setHeaderTheme(null)
-  }, [setHeaderTheme])
-
-  useEffect(() => {
-    if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
-  }, [headerTheme, theme])
 
   return (
     <header
@@ -40,7 +30,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             loading="eager"
             priority="high"
             className="dark:invert-0 h-[40px] w-auto"
-            theme={theme}
             //@ts-expect-error logoImage is defined
             logoImage={data?.logoImage}
           />

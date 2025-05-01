@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 import { FaQuoteRight } from 'react-icons/fa' // Quote icon
 
 // Type definitions based on config.ts
-type Testimonial = {
+export type Testimonial = {
   id?: string | null
   companyLogo?: MediaType | string | null // Can be object or just ID string
   testimonialText: string

@@ -24,15 +24,17 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
-import { adminOrEditor, authenticatedOrPublished, onlyAdmin } from '@/access/authentications'
+import { isAdminOrEditor } from '@/access/isAdminOrEditor'
+import { onlyAdmins } from '@/access/onlyAdmins'
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
   access: {
-    create: adminOrEditor,
-    delete: onlyAdmin,
+    create: isAdminOrEditor,
+    delete: onlyAdmins,
     read: authenticatedOrPublished,
-    update: adminOrEditor,
+    update: isAdminOrEditor,
   },
   // This config controls what's populated by default when a post is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property

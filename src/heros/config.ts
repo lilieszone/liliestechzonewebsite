@@ -39,6 +39,25 @@ export const hero: Field = {
       required: true,
     },
     {
+      name: 'title',
+      type: 'text',
+      label: 'Title',
+      required: true,
+      defaultValue: 'Experts in Modern Web Application Development',
+    },
+    {
+      name: 'subTagline',
+      type: 'text',
+      label: 'Sub Tagline',
+      defaultValue:
+        'Learn about our vision, mission, and the development philosophy that drives our success.',
+    },
+    {
+      name: 'highlightText',
+      type: 'text',
+      label: 'Highlight Text',
+    },
+    {
       name: 'richText',
       type: 'richText',
       editor: lexicalEditor({

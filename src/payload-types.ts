@@ -177,6 +177,9 @@ export interface Page {
   title: string;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    title: string;
+    subTagline?: string | null;
+    highlightText?: string | null;
     richText?: {
       root: {
         type: string;
@@ -404,6 +407,35 @@ export interface Page {
         blockName?: string | null;
         blockType: 'pricing';
       }
+    | {
+        /**
+         * Small text above the main heading, e.g., "DON'T JUST TAKE OUR WORD FOR IT".
+         */
+        eyebrow?: string | null;
+        /**
+         * Main heading for the testimonials section.
+         */
+        heading?: string | null;
+        /**
+         * Add individual testimonials here.
+         */
+        testimonials: {
+          companyLogo?: (number | null) | Media;
+          testimonialText: string;
+          authorImage?: (number | null) | Media;
+          authorName: string;
+          authorTitle: string;
+          /**
+           * Adds a distinct border/style (like the purple border example).
+           */
+          highlightCard?: boolean | null;
+          id?: string | null;
+        }[];
+        backgroundColor?: ('transparent' | 'white' | 'gray-50' | 'blue-50') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'testimonials';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -586,7 +618,7 @@ export interface Category {
  */
 export interface User {
   id: number;
-  role: 'admin' | 'editor' | 'subscriber';
+  roles: 'admin' | 'subscriber' | 'editor';
   firstName: string;
   lastName: string;
   gender?: ('male' | 'female') | null;
@@ -1211,6 +1243,9 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         type?: T;
+        title?: T;
+        subTagline?: T;
+        highlightText?: T;
         richText?: T;
         links?:
           | T
@@ -1600,7 +1635,7 @@ export interface CategoriesSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  role?: T;
+  roles?: T;
   firstName?: T;
   lastName?: T;
   gender?: T;
@@ -2063,7 +2098,7 @@ export interface Partner {
     /**
      * Upload the partner's logo.
      */
-    logo: number | Media;
+    logo?: (number | null) | Media;
     /**
      * Enter the name of the partner.
      */

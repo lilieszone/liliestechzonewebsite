@@ -1,24 +1,18 @@
-import {
-  adminOrSelf,
-  authenticated,
-  canUpdateRole,
-  isFirstUser,
-  onlyAdmin,
-} from '@/access/authentications'
+import { isAdminOrSeft } from '@/access/adminOrSeft'
+import { anyone } from '@/access/anyone'
+import { authenticated } from '@/access/authenticated'
+import { isAdmin } from '@/access/isAdmin'
+import { onlyAdmins } from '@/access/onlyAdmins'
 import type { CollectionConfig } from 'payload'
 
 export const Users: CollectionConfig = {
   slug: 'users',
   access: {
-    create: async ({ data }) => {
-      const firstUser = await isFirstUser()
-      if (firstUser) return true
-      return data?.role !== 'admin' // Prevent non-first users from self-assigning admin
-    },
+    admin: isAdmin,
+    create: anyone,
     read: authenticated,
-    update: adminOrSelf,
-    delete: onlyAdmin,
-    admin: onlyAdmin,
+    update: isAdminOrSeft,
+    delete: onlyAdmins,
   },
   admin: {
     defaultColumns: ['name', 'email'],
@@ -42,19 +36,21 @@ export const Users: CollectionConfig = {
       required: true,
     },
     {
-      name: 'role',
-      type: 'select',
+      name: 'roles',
+      label: 'Role',
       saveToJWT: true,
-      options: ['admin', 'editor', 'subscriber'],
-      access: {
-        create: canUpdateRole,
-        update: canUpdateRole,
-      },
+      type: 'select',
       required: true,
-      defaultValue: 'subscriber',
-      admin: {
-        position: 'sidebar',
+      access: {
+        create: onlyAdmins,
+        update: onlyAdmins,
       },
+      options: [
+        { label: 'Admin', value: 'admin' },
+        { label: 'subscriber', value: 'subscriber' },
+        { label: 'Editor', value: 'editor' },
+      ],
+      defaultValue: 'subscriber',
     },
     {
       name: 'firstName',

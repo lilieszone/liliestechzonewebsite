@@ -10,7 +10,9 @@ import { Logo } from '@/components/Logo/Logo'
 import SocialProviders from './SocialProviders'
 
 export async function Footer() {
+  //@ts-expect-error - footer is not defined
   const footer: Footer = await getCachedGlobal('footer', 1)()
+  //@ts-expect-error - headerData is not defined
   const headerData: Header = await getCachedGlobal('header', 1)()
   const navItems = footer?.navItems || []
   const providers = footer?.providers || [] // Get providers
@@ -19,13 +21,7 @@ export async function Footer() {
     <footer className="border-t border-border">
       <div className="px-2 lg:px-12 py-8 gap-8 flex flex-col md:flex-row md:justify-between">
         <Link className="flex items-center" href="/">
-          <Logo
-            loading="eager"
-            priority="high"
-            className="dark:invert-0 h-[60px] sm:h-auto"
-            //@ts-expect-error - logoImage is not defined
-            logoImage={headerData?.logoImage}
-          />
+          <Logo />
           <h1 className="ml-2 font-pacifico text-lg text-primary-foreground">
             {headerData?.siteTitle}
           </h1>

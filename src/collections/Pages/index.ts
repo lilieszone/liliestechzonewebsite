@@ -18,19 +18,20 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import { anyone, onlyAdmin } from '@/access/authentications'
 import { IconsBlock } from '@/blocks/IconsBlock/config'
 import { FeatureListBlock } from '@/blocks/FeatureListBlock/config'
 import { TestimonialsBlock } from '@/blocks/Testimonials/config'
 import { PricingBlock } from '@/blocks/Pricing/config'
+import { onlyAdmins } from '@/access/onlyAdmins'
+import { anyone } from '@/access/anyone'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
   access: {
-    create: onlyAdmin,
-    delete: onlyAdmin,
+    create: onlyAdmins,
+    delete: onlyAdmins,
     read: anyone,
-    update: onlyAdmin,
+    update: onlyAdmins,
   },
   // This config controls what's populated by default when a page is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
@@ -88,6 +89,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FeatureListBlock,
                 TestimonialsBlock,
                 PricingBlock,
+                TestimonialsBlock,
               ],
               required: true,
               admin: {

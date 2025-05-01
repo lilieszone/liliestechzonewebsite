@@ -30,7 +30,6 @@ export const Partners: GlobalConfig = {
           label: 'Logo',
           type: 'upload',
           relationTo: 'media', // Ensure you have a 'media' collection
-          required: true,
           admin: {
             description: "Upload the partner's logo.",
           },
@@ -40,6 +39,7 @@ export const Partners: GlobalConfig = {
           label: 'Partner Name',
           type: 'text',
           required: true,
+          defaultValue: 'Next.js',
           admin: {
             description: 'Enter the name of the partner.',
           },

@@ -1,4 +1,5 @@
 import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from 'payload'
+import type { Media } from '@/payload-types'
 
 import { contactForm as contactFormData } from './contact-form'
 import { contact as contactPageData } from './contact-page'
@@ -18,8 +19,9 @@ const collections: CollectionSlug[] = [
   'forms',
   'form-submissions',
   'search',
+  'users',
 ]
-const globals: GlobalSlug[] = ['header', 'footer']
+const globals: GlobalSlug[] = ['header', 'footer', 'partners']
 
 // Next.js revalidation errors are normal when seeding the database without a server running
 // i.e. running `yarn seed` locally instead of using the admin UI within an active app
@@ -32,6 +34,23 @@ export const seed = async ({
   payload: Payload
   req: PayloadRequest
 }): Promise<void> => {
+  const MAX_RETRIES = 3
+  const RETRY_DELAY = 1000 // 1 second
+
+  const retryOperation = async <T>(operation: () => Promise<T>, description: string): Promise<T> => {
+    let lastError: Error | null = null
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        return await operation()
+      } catch (error) {
+        payload.logger.warn(`${description} - Attempt ${attempt} failed`, error)
+        lastError = error as Error
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY * attempt))
+      }
+    }
+    payload.logger.error(`${description} failed after ${MAX_RETRIES} attempts`)
+    throw lastError || new Error(`${description} failed`)
+  }
   payload.logger.info('Seeding database...')
 
   // we need to clear the media directory before seeding
@@ -42,33 +61,59 @@ export const seed = async ({
 
   // clear the database
   await Promise.all(
-    globals.map((global) =>
-      payload.updateGlobal({
-        slug: global,
-        data: {
-          //@ts-expect-error fix later
-          navItems: [],
-        },
+    globals.map((globalSlug) => {
+      // Determine the default empty state based on the global slug
+      let emptyData: Record<string, any> = {}
+      if (globalSlug === 'header' || globalSlug === 'footer') {
+        emptyData = { navItems: [] }
+      } else if (globalSlug === 'partners') {
+        emptyData = { 
+          partnerList: [
+            {
+              name: 'Default Partner',
+              logo: null,
+              link: 'https://example.com',
+              description: 'A default partner for seeding purposes'
+            }
+          ]
+        }
+      }
+      // Add more else if blocks for other globals if needed
+
+      return payload.updateGlobal({
+        slug: globalSlug,
+        data: emptyData,
         depth: 0,
         context: {
           disableRevalidate: true,
         },
-      }),
-    ),
+      })
+    }),
   )
 
-  await Promise.all(
-    collections.map((collection) => payload.db.deleteMany({ collection, req, where: {} })),
-  )
+  // Delete all collections except users
+  // Clear non-user collections with retry mechanism
+  await retryOperation(async () => {
+    await Promise.all(
+      collections
+        .filter((collection) => collection !== 'users')
+        .map((collection) => payload.db.deleteMany({ collection, req, where: {} })),
+    )
+  }, 'Clearing non-user collections')
 
-  await Promise.all(
-    collections
-      .filter((collection) => Boolean(payload.collections[collection].config.versions))
-      .map((collection) => payload.db.deleteVersions({ collection, req, where: {} })),
-  )
+  // Delete versions for non-user collections with retry mechanism
+  await retryOperation(async () => {
+    await Promise.all(
+      collections
+        .filter((collection) => collection !== 'users')
+        .filter((collection) => Boolean(payload.collections[collection].config.versions))
+        .map((collection) => payload.db.deleteVersions({ collection, req, where: {} })),
+    )
+  }, 'Deleting non-user collection versions')
 
   payload.logger.info(`— Seeding demo author and user...`)
 
+  // Delete only the demo author, preserve other users
   await payload.delete({
     collection: 'users',
     depth: 0,
@@ -103,7 +148,7 @@ export const seed = async ({
         firstName: 'Demo Author',
         lastName: 'author',
         email: 'demo-author@example.com',
-        role: 'editor',
+        roles: 'editor',
         password: 'password',
       },
     }),
@@ -270,11 +315,14 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding pages...`)
 
-  const [_, contactPage] = await Promise.all([
+  const [homePage, contactPage] = await Promise.all([
     payload.create({
       collection: 'pages',
       depth: 0,
-      data: home({ heroImage: imageHomeDoc, metaImage: image2Doc }),
+      data: home({
+        heroImage: imageHomeDoc,
+        metaImage: image2Doc,
+      }),
     }),
     payload.create({
       collection: 'pages',
@@ -438,6 +486,28 @@ export const seed = async ({
               newTab: true,
               url: 'https://payloadcms.com/',
             },
+          },
+        ],
+      },
+    }),
+    payload.updateGlobal({
+      slug: 'partners',
+      data: {
+        partnerList: [
+          {
+            logo: image1Doc.id,
+            title: 'Placeholder Partner',
+            link: '#',
+          },
+          {
+            logo: image1Doc.id,
+            title: 'Placeholder Partner 3',
+            link: '#',
+          },
+          {
+            logo: image1Doc.id,
+            title: 'Placeholder Partner 2',
+            link: '#',
           },
         ],
       },
