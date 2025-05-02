@@ -26,6 +26,12 @@ export const CallToAction: Block = {
       required: false,
     },
     {
+      name: 'darkImage',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
+    },
+    {
       name: 'richText',
       type: 'richText',
       editor: lexicalEditor({

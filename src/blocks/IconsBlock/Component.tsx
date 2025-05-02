@@ -31,7 +31,6 @@ type IconsBlockType = {
 
 export const IconsBlock: React.FC<IconsBlockType> = (block) => {
   const { heading, features, backgroundColor } = block
-  console.log(block, 'block')
 
   // Animation variants for staggered animations
   const containerVariants = {

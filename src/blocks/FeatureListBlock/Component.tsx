@@ -6,6 +6,7 @@ import { Media as MediaType, Page } from '@/payload-types'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { motion } from 'framer-motion'
+import { useTheme } from '@/providers/Theme'
 
 // Types matching your existing config structure
 type FeatureType = {
@@ -20,6 +21,7 @@ type ImageSectionType = {
 
 type FeatureListBlockProps = {
   imageCfg?: ImageSectionType | null
+  darkImage?: MediaType | null
   status?: {
     showStatusIcon?: boolean | null
     text?: string | null
@@ -48,6 +50,7 @@ const renderTitle = (title?: string | null, highlight?: string | null) => {
 
 export const FeatureListBlockComponent: React.FC<FeatureListBlockProps> = ({
   imageCfg,
+  darkImage,
   status,
   title,
   titleHighlightText,
@@ -55,11 +58,15 @@ export const FeatureListBlockComponent: React.FC<FeatureListBlockProps> = ({
   links,
 }) => {
   const { image, imagePosition = 'left' } = imageCfg || {}
+  const { theme } = useTheme()
+  const hasDarkImage = Boolean(darkImage)
+
+  const imageUrl = theme === 'dark' && hasDarkImage ? darkImage?.url : image?.url
+  console.log(darkImage, 'darkimage', theme)
 
   const hasStatusText = status?.text && status.text.trim() !== ''
-  const imageUrl = typeof image === 'object' && image !== null ? image.url : null
+  // let imageUrl = typeof image === 'object' && image !== null ? image.url : null
   const imageAlt = typeof image === 'object' && image !== null ? image.alt : 'Feature image'
-  console.log(features, 'features', hasStatusText, 'hasStatusText')
 
   // Animation variants
   const containerVariants = {
@@ -114,21 +121,21 @@ export const FeatureListBlockComponent: React.FC<FeatureListBlockProps> = ({
               )}
               variants={imageVariants}
             >
-              <div className="relative h-full overflow-hidden rounded-lg border border-gray-200/50 shadow-xl">
+              <div className="relative h-full hover:scale-110 transition-transform duration-300 overflow-hidden rounded-lg border border-gray-200/50 shadow-xl">
                 {/* Main image */}
                 <Image
                   src={imageUrl}
                   alt={imageAlt || title || 'Feature Block Image'}
                   width={600}
                   height={700}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover rounded-lg"
                   priority
                 />
 
                 {/* Stats Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 text-white">
+                {/* <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 text-white">
                   <div className="flex h-full flex-col justify-end">
-                    {/* Stats Text */}
+
                     <div className="mb-2 flex items-baseline justify-between">
                       <div>
                         <div className="text-xs font-medium uppercase opacity-80">Followers</div>
@@ -139,7 +146,7 @@ export const FeatureListBlockComponent: React.FC<FeatureListBlockProps> = ({
                       </div>
                     </div>
 
-                    {/* Graph */}
+      
                     <div className="h-12 w-full">
                       <motion.div
                         className="h-8 w-full"
@@ -169,8 +176,8 @@ export const FeatureListBlockComponent: React.FC<FeatureListBlockProps> = ({
                         </svg>
                       </motion.div>
                     </div>
-                  </div>
-                </div>
+                  </div> */}
+                {/* </div> */}
               </div>
             </motion.div>
           )}

@@ -1,25 +1,25 @@
 import React from 'react'
-import Image from 'next/image'
-
 import type { CallToActionBlock as CTABlockProps } from '@/payload-types'
 
 import RichText from '@/components/RichText'
 import { CMSLink } from '@/components/Link'
-import { Media } from '@/payload-types'
+import { CallToActionImage } from './ImageClient'
 
 export const CallToActionBlock: React.FC<CTABlockProps> = ({
   links,
   richText,
   title,
   ctaImage,
+  darkImage,
 }) => {
   const hasImage = Boolean(ctaImage)
-  const imageUrl = typeof ctaImage === 'object' && (ctaImage as Media)?.url
 
   return (
     <div className="container py-8 md:py-12">
-      <div className="bg-muted/20 rounded-xl relative overflow-hidden">
-        <div className={`flex flex-col ${hasImage ? 'md:flex-row' : 'items-center justify-center'} items-stretch`}>
+      <div className="bg-muted/20 dark:bg-muted/50 rounded-xl relative overflow-visible">
+        <div
+          className={`flex flex-col ${hasImage ? 'md:flex-row' : 'items-center justify-center'} items-stretch`}
+        >
           <div
             className={`flex flex-col ${hasImage ? 'md:w-1/2' : 'max-w-2xl'} p-8 md:p-12 justify-center z-10`}
           >
@@ -34,8 +34,8 @@ export const CallToActionBlock: React.FC<CTABlockProps> = ({
                     size="lg"
                     className={
                       i === 0
-                        ? 'bg-primary text-white hover:bg-primary/90'
-                        : 'bg-white border border-gray-200 hover:bg-gray-50'
+                        ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                        : 'bg-background border border-border hover:bg-muted'
                     }
                     {...link}
                   />
@@ -44,18 +44,9 @@ export const CallToActionBlock: React.FC<CTABlockProps> = ({
             </div>
           </div>
 
-          {hasImage && imageUrl && (
-            <div className="hidden md:block md:w-1/2 relative">
-              <div className="absolute -top-24 -bottom-24 -right-12 left-0">
-                <Image
-                  src={imageUrl}
-                  alt={title || 'Call to action'}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
+          {hasImage && (
+            //@ts-expect-error - We're passing the correct types
+            <CallToActionImage ctaImage={ctaImage} darkImage={darkImage} title={title} />
           )}
         </div>
       </div>

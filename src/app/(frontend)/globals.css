@@ -20,7 +20,7 @@
   :root {
     /* Base colors */
     --background: #ffffff;
-    --foreground: #1a1a1a;
+    --foreground: #000000;
 
     /* Component colors */
     --card: #ffffff93;
@@ -61,7 +61,7 @@
 
   [data-theme='dark'] {
     /* Base colors */
-    --background: #0f172a;
+    --background: #000000;
     --foreground: #f8fafc;
 
     /* Component colors */

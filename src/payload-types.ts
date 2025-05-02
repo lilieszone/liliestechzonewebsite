@@ -220,6 +220,7 @@ export interface Page {
         }[]
       | null;
     media?: (number | null) | Media;
+    darkMedia?: (number | null) | Media;
   };
   layout: (
     | CallToActionBlock
@@ -256,6 +257,7 @@ export interface Page {
     | {
         imageCfg: {
           image: number | Media;
+          darkImage?: (number | null) | Media;
           imagePosition?: ('left' | 'right') | null;
         };
         status?: {
@@ -645,6 +647,7 @@ export interface User {
 export interface CallToActionBlock {
   title?: string | null;
   ctaImage?: (number | null) | Media;
+  darkImage?: (number | null) | Media;
   richText?: {
     root: {
       type: string;
@@ -1319,6 +1322,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        darkMedia?: T;
       };
   layout?:
     | T
@@ -1353,6 +1357,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     image?: T;
+                    darkImage?: T;
                     imagePosition?: T;
                   };
               status?:
@@ -1466,6 +1471,7 @@ export interface PagesSelect<T extends boolean = true> {
 export interface CallToActionBlockSelect<T extends boolean = true> {
   title?: T;
   ctaImage?: T;
+  darkImage?: T;
   richText?: T;
   links?:
     | T

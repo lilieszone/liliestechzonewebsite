@@ -86,6 +86,14 @@ export const hero: Field = {
       relationTo: 'media',
       required: true,
     },
+    {
+      name: 'darkMedia',
+      type: 'upload',
+      admin: {
+        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
+      },
+      relationTo: 'media',
+    },
   ],
   label: false,
 }

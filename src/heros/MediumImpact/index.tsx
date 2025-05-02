@@ -19,7 +19,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
   const titleParts = title ? title.split(highlightText || '') : ['', '']
 
   return (
-    <section className="py-10 md:py-20 container">
+    <section className="relative py-10 md:py-20 container">
       <div className="container max-w-6xl mx-auto px-4">
         <div className="flex flex-row items-center justify-center gap-2 mb-8">
           <FaBolt className="text-green-500" />
@@ -30,13 +30,19 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
 
         <h1 className="text-5xl md:text-7xl font-bold text-dark-green mb-8 leading-tight">
           {titleParts[0]}
-          <span className="text-green-500">{highlightText}</span>
+          <span className=" text-green-500 inline-block hover:scale-110 transition-transform duration-300">
+            {highlightText}
+          </span>
           {titleParts[1]}
         </h1>
 
         {richText && (
           <div className="mb-12 max-w-3xl">
-            <RichText className="text-lg text-gray-700" data={richText} enableGutter={false} />
+            <RichText
+              className="text-lg text-gray-700 dark:text-white"
+              data={richText}
+              enableGutter={false}
+            />
           </div>
         )}
 
@@ -65,10 +71,10 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
         )}
 
         {media && typeof media === 'object' && (
-          <div className="mt-16">
+          <div className="mt-16 rounded-lg">
             <Media
               className="w-full rounded-lg shadow-lg"
-              imgClassName="w-full h-auto"
+              imgClassName="w-full h-auto hover:scale-110 transition-transform duration-300 rounded-lg"
               priority
               resource={media}
             />

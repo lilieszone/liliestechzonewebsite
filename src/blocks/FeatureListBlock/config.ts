@@ -21,6 +21,12 @@ export const FeatureListBlock: Block = {
           required: true,
         },
         {
+          name: 'darkImage',
+          label: 'Dark Image',
+          type: 'upload',
+          relationTo: 'media',
+        },
+        {
           name: 'imagePosition',
           label: 'Image Position',
           type: 'radio',

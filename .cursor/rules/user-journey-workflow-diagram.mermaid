@@ -1,0 +1,132 @@
+flowchart TB
+    subgraph "Company Structure"
+        direction TB
+        
+        subgraph "Management Layer"
+            CEO["CEO/Management"]
+            ProductOwner["Product Owner"]
+            ProjectManager["Project Managers"]
+        end
+        
+        subgraph "Delivery Teams"
+            TechLead["Technical Leads"]
+            Developers["Developers"]
+            Designers["Designers"]
+            QA["QA Engineers"]
+        end
+        
+        subgraph "Client Relations"
+            AccountManager["Account Managers"]
+            ClientSuccess["Client Success Team"]
+        end
+    end
+    
+    subgraph "SaaS Platform Core Processes"
+        direction TB
+        
+        subgraph "Project Lifecycle"
+            direction LR
+            ProjectInit["Project Initialization"]
+            RequirementGather["Requirements Gathering"]
+            Planning["Planning & Estimation"]
+            Design["Design Phase"]
+            Development["Development Phase"]
+            Testing["Testing Phase"]
+            Deployment["Deployment"]
+            Maintenance["Maintenance & Support"]
+            
+            ProjectInit --> RequirementGather
+            RequirementGather --> Planning
+            Planning --> Design
+            Design --> Development
+            Development --> Testing
+            Testing --> Deployment
+            Deployment --> Maintenance
+        end
+        
+        subgraph "Client Engagement Flow"
+            direction LR
+            ClientOnboarding["Client Onboarding"]
+            ProjectKickoff["Project Kickoff"]
+            ProgressReviews["Progress Reviews"]
+            FeedbackCycles["Feedback Cycles"]
+            Approvals["Approvals"]
+            Handover["Handover"]
+            
+            ClientOnboarding --> ProjectKickoff
+            ProjectKickoff --> ProgressReviews
+            ProgressReviews --> FeedbackCycles
+            FeedbackCycles --> Approvals
+            Approvals --> Handover
+        end
+    end
+    
+    subgraph "Platform Features"
+        subgraph "Project Management Hub"
+            PMDashboard["Dashboard"]
+            TaskManagement["Task Management"]
+            ResourceAllocation["Resource Allocation"]
+            TimeTracking["Time Tracking"]
+            Reporting["Reporting & Analytics"]
+        end
+        
+        subgraph "Development Tools"
+            CodeRepo["Code Repository Integration"]
+            ComponentLibrary["Component Library"]
+            APIManagement["API Management"]
+            EnvManagement["Environment Management"]
+            QATools["QA Tools"]
+        end
+        
+        subgraph "Collaboration Features"
+            DesignCollab["Design Collaboration"]
+            CodeCollab["Code Collaboration"]
+            CommsHub["Communication Hub"]
+            DocManagement["Documentation"]
+        end
+        
+        subgraph "Client Portal"
+            ClientDashboard["Client Dashboard"]
+            FeedbackTools["Feedback Tools"]
+            ApprovalSystem["Approval System"]
+            AssetSharing["Asset Sharing"]
+        end
+    end
+    
+    %% Connections between company structure and processes
+    CEO --> ProjectInit
+    ProductOwner --> RequirementGather
+    ProjectManager --> Planning
+    ProjectManager --> ProgressReviews
+    
+    TechLead --> Development
+    Developers --> Development
+    Designers --> Design
+    QA --> Testing
+    
+    AccountManager --> ClientOnboarding
+    ClientSuccess --> FeedbackCycles
+    
+    %% Connections between processes and features
+    ProjectInit -.-> PMDashboard
+    RequirementGather -.-> DocManagement
+    Planning -.-> TaskManagement
+    Planning -.-> ResourceAllocation
+    
+    Design -.-> DesignCollab
+    Development -.-> CodeRepo
+    Development -.-> ComponentLibrary
+    Development -.-> APIManagement
+    Development -.-> CodeCollab
+    
+    Testing -.-> QATools
+    Testing -.-> EnvManagement
+    
+    ClientOnboarding -.-> ClientDashboard
+    ProgressReviews -.-> Reporting
+    FeedbackCycles -.-> FeedbackTools
+    Approvals -.-> ApprovalSystem
+    
+    TimeTracking -.-> Reporting
+    CommsHub -.-> FeedbackCycles
+    AssetSharing -.-> Handover
