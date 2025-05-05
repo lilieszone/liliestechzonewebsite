@@ -255,8 +255,8 @@ export interface Page {
         blockType: 'iconsBlock';
       }
     | {
-        imageCfg: {
-          image: number | Media;
+        imageCfg?: {
+          image?: (number | null) | Media;
           darkImage?: (number | null) | Media;
           imagePosition?: ('left' | 'right') | null;
         };

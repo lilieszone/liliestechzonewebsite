@@ -53,7 +53,7 @@ const createRichTextRoot = (children: any[]) => ({
     version: 1,
   },
 })
-
+//@ts-expect-error - TODO: fix this
 export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
   contactForm,
 }) => {
@@ -64,12 +64,12 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
     hero: {
       type: 'mediumImpact',
       title: "Let's Build Your Next Web Application",
-      subTagline: "Start Your Project",
-      highlightText: "Custom",
+      subTagline: 'Start Your Project',
+      highlightText: 'Custom',
       richText: createRichTextRoot([
         formatRichText(
           "Reach out to discuss your project requirements. We're ready to help you define, design, and develop a custom solution that drives results.",
-          'p'
+          'p',
         ),
       ]),
       links: [
@@ -100,7 +100,9 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
         sectionId: 'contact-info',
         content: createRichTextRoot([
           formatRichText('Contact Information', 'h2'),
-          formatRichText('Our team is ready to answer your questions and discuss your project needs during business hours.'),
+          formatRichText(
+            'Our team is ready to answer your questions and discuss your project needs during business hours.',
+          ),
           formatRichText('Email: contact@liliestechzone.com'),
           formatRichText('Phone: (555) 123-4567'),
           formatRichText('Location: San Francisco, CA'),
@@ -118,7 +120,9 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
         form: contactForm,
         introContent: createRichTextRoot([
           formatRichText('Tell Us About Your Project', 'h2'),
-          formatRichText('Fill out the form below to get started with your custom web application project. Our team will review your requirements and contact you within 1-2 business days to schedule an initial discovery call.'),
+          formatRichText(
+            'Fill out the form below to get started with your custom web application project. Our team will review your requirements and contact you within 1-2 business days to schedule an initial discovery call.',
+          ),
         ]),
       },
 
@@ -131,7 +135,7 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
         content: createRichTextRoot([
           formatRichText('What Happens Next?', 'h2'),
           formatRichText(
-            "Thank you for your interest! We've received your inquiry and will review the details carefully. A member of our team will reach out within 1-2 business days to schedule an initial discovery call and discuss the next steps."
+            "Thank you for your interest! We've received your inquiry and will review the details carefully. A member of our team will reach out within 1-2 business days to schedule an initial discovery call and discuss the next steps.",
           ),
         ]),
       },
@@ -206,10 +210,10 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
         richText: createRichTextRoot([
           formatRichText('Feature Your Project in Our Development Series', 'h2'),
           formatRichText(
-            'Interested in having your project documented through our YouTube channel? We select certain client projects to feature in our development series, providing educational content while showcasing your application.'
+            'Interested in having your project documented through our YouTube channel? We select certain client projects to feature in our development series, providing educational content while showcasing your application.',
           ),
           formatRichText(
-            'Benefits include additional exposure for your brand, behind-the-scenes development insights, educational content for your team, and potential discounts on development services.'
+            'Benefits include additional exposure for your brand, behind-the-scenes development insights, educational content for your team, and potential discounts on development services.',
           ),
         ]),
         links: [
@@ -226,7 +230,8 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
     ],
     meta: {
       title: 'Contact Us | Lilies Tech Zone',
-      description: 'Get in touch with our team to discuss your web application project requirements and start building your custom solution.',
+      description:
+        'Get in touch with our team to discuss your web application project requirements and start building your custom solution.',
       image: null,
     },
   }

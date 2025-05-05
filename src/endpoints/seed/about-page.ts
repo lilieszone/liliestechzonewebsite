@@ -53,7 +53,7 @@ const createRichTextRoot = (children: any[]) => ({
     version: 1,
   },
 })
-
+//@ts-expect-error - TODO: fix this
 export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
   metaImage,
 }) => {
@@ -69,7 +69,7 @@ export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'>
       richText: createRichTextRoot([
         formatRichText(
           'We streamline the development process for sophisticated web applications using Payload CMS 3.0, delivering exceptional value and fostering transparent partnerships with our clients.',
-          'p'
+          'p',
         ),
       ]),
       links: [
@@ -100,9 +100,13 @@ export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'>
         sectionId: 'vision-mission',
         content: createRichTextRoot([
           formatRichText('Our Vision', 'h2'),
-          formatRichText('To create a platform that enables efficient building and delivery of complex, customized web applications for clients while showcasing expertise through integrated YouTube content.'),
+          formatRichText(
+            'To create a platform that enables efficient building and delivery of complex, customized web applications for clients while showcasing expertise through integrated YouTube content.',
+          ),
           formatRichText('Our Mission', 'h2'),
-          formatRichText('We streamline the development process for sophisticated web applications using Payload CMS 3.0, delivering exceptional value and fostering transparent partnerships with our clients. We aim to demonstrate technical excellence and share our knowledge through practical examples and educational content.'),
+          formatRichText(
+            'We streamline the development process for sophisticated web applications using Payload CMS 3.0, delivering exceptional value and fostering transparent partnerships with our clients. We aim to demonstrate technical excellence and share our knowledge through practical examples and educational content.',
+          ),
         ]),
       },
 
@@ -142,7 +146,8 @@ export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'>
             iconName: 'FaVial',
             iconLibrary: 'fa',
             title: 'Continuous Testing',
-            description: 'Automated tests at every level to ensure stability and prevent regressions.',
+            description:
+              'Automated tests at every level to ensure stability and prevent regressions.',
           },
         ],
       },
@@ -155,7 +160,9 @@ export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'>
         sectionId: 'payload-cms',
         content: createRichTextRoot([
           formatRichText('The Power of Headless Flexibility', 'h2'),
-          formatRichText('Payload CMS 3.0 is central to our approach. Its developer-centric design, TypeScript foundation, and highly extensible nature allow us to build truly custom backends and administrative interfaces efficiently. This means faster development, easier content management for you, and robust, scalable applications perfectly tailored to your needs.'),
+          formatRichText(
+            'Payload CMS 3.0 is central to our approach. Its developer-centric design, TypeScript foundation, and highly extensible nature allow us to build truly custom backends and administrative interfaces efficiently. This means faster development, easier content management for you, and robust, scalable applications perfectly tailored to your needs.',
+          ),
         ]),
       },
 
@@ -227,10 +234,22 @@ export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'>
           formatRichText('From Code to Production with Confidence', 'h2'),
           formatRichText('Our deployment process is built for reliability and efficiency:'),
           formatRichText('Continuous Integration: Automated testing on every code commit.', 'li'),
-          formatRichText('Infrastructure as Code: Reproducible environments across development and production.', 'li'),
-          formatRichText('Containerization: Docker-based deployments for consistency and scaling.', 'li'),
-          formatRichText('Automated Rollbacks: Instant recovery options if issues are detected.', 'li'),
-          formatRichText('Performance Monitoring: Real-time analytics to ensure optimal application health.', 'li'),
+          formatRichText(
+            'Infrastructure as Code: Reproducible environments across development and production.',
+            'li',
+          ),
+          formatRichText(
+            'Containerization: Docker-based deployments for consistency and scaling.',
+            'li',
+          ),
+          formatRichText(
+            'Automated Rollbacks: Instant recovery options if issues are detected.',
+            'li',
+          ),
+          formatRichText(
+            'Performance Monitoring: Real-time analytics to ensure optimal application health.',
+            'li',
+          ),
         ]),
       },
 
@@ -284,7 +303,7 @@ export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'>
         richText: createRichTextRoot([
           formatRichText('Partner with Experienced Developers', 'h2'),
           formatRichText(
-            'Ready to start your custom web application project? Our team of experts is ready to help bring your vision to life with modern technologies and transparent development practices.'
+            'Ready to start your custom web application project? Our team of experts is ready to help bring your vision to life with modern technologies and transparent development practices.',
           ),
         ]),
         links: [
@@ -301,7 +320,8 @@ export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'>
     ],
     meta: {
       title: 'About Us | Lilies Tech Zone',
-      description: 'Learn about our expertise in modern web application development using PayloadCMS, Next.js, and TypeScript. Discover our transparent approach and commitment to quality.',
+      description:
+        'Learn about our expertise in modern web application development using PayloadCMS, Next.js, and TypeScript. Discover our transparent approach and commitment to quality.',
       image: metaImage.id,
     },
   }

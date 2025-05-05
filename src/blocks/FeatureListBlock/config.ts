@@ -18,7 +18,6 @@ export const FeatureListBlock: Block = {
           label: 'Image',
           type: 'upload',
           relationTo: 'media',
-          required: true,
         },
         {
           name: 'darkImage',

@@ -53,7 +53,7 @@ const createRichTextRoot = (children: any[]) => ({
     version: 1,
   },
 })
-
+//@ts-expect-error - TODO: fix this
 export const services: (args: ServicesArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
   metaImage,
 }) => {
@@ -69,7 +69,7 @@ export const services: (args: ServicesArgs) => RequiredDataFromCollectionSlug<'p
       richText: createRichTextRoot([
         formatRichText(
           'Specializing in Payload CMS 3.0 & Next.js for scalable, high-performance web applications tailored to your specific business requirements.',
-          'p'
+          'p',
         ),
       ]),
       links: [
@@ -100,13 +100,30 @@ export const services: (args: ServicesArgs) => RequiredDataFromCollectionSlug<'p
         sectionId: 'service-offerings',
         content: createRichTextRoot([
           formatRichText('End-to-End Application Development', 'h2'),
-          formatRichText('We handle the entire lifecycle, from initial concept and design to development, deployment, and ongoing support. Our expertise includes:'),
-          formatRichText('Custom Client Portals & Dashboards: Enhance client interaction and data visibility.', 'li'),
-          formatRichText('Internal Business Tools: Streamline operations and automate workflows.', 'li'),
-          formatRichText('SaaS Platform Development: Build and scale your software-as-a-service product.', 'li'),
+          formatRichText(
+            'We handle the entire lifecycle, from initial concept and design to development, deployment, and ongoing support. Our expertise includes:',
+          ),
+          formatRichText(
+            'Custom Client Portals & Dashboards: Enhance client interaction and data visibility.',
+            'li',
+          ),
+          formatRichText(
+            'Internal Business Tools: Streamline operations and automate workflows.',
+            'li',
+          ),
+          formatRichText(
+            'SaaS Platform Development: Build and scale your software-as-a-service product.',
+            'li',
+          ),
           formatRichText('API Design & Integration: Connect systems and enable data flow.', 'li'),
-          formatRichText('Content-Driven Applications: Leverage Payload CMS for powerful content management.', 'li'),
-          formatRichText('E-commerce Solutions: Custom online stores integrated with business logic.', 'li'),
+          formatRichText(
+            'Content-Driven Applications: Leverage Payload CMS for powerful content management.',
+            'li',
+          ),
+          formatRichText(
+            'E-commerce Solutions: Custom online stores integrated with business logic.',
+            'li',
+          ),
         ]),
       },
 
@@ -160,10 +177,16 @@ export const services: (args: ServicesArgs) => RequiredDataFromCollectionSlug<'p
         titleHighlightText: 'AI',
         title: 'Next-Generation Development with AI',
         features: [
-          { featureText: 'AI-Powered Requirements Analysis: Intelligent parsing of project specifications' },
+          {
+            featureText:
+              'AI-Powered Requirements Analysis: Intelligent parsing of project specifications',
+          },
           { featureText: 'Smart Code Generation: AI-assisted creation of boilerplate components' },
           { featureText: 'Automated Testing & QA: AI-driven test generation and execution' },
-          { featureText: 'Performance Optimization: Intelligent analysis of application performance' },
+          {
+            featureText:
+              'Performance Optimization: Intelligent analysis of application performance',
+          },
           { featureText: 'Content Generation Assistance: AI tools for placeholder content' },
         ],
       },
@@ -177,13 +200,34 @@ export const services: (args: ServicesArgs) => RequiredDataFromCollectionSlug<'p
         content: createRichTextRoot([
           formatRichText('A Streamlined & Transparent Workflow', 'h2'),
           formatRichText('We follow a structured process to ensure quality and alignment:'),
-          formatRichText('1. Discovery & Strategy: Deep dive into your requirements, goals, and technical needs.', 'li'),
-          formatRichText('2. Design & UX/UI: Wireframing, prototyping, and designing intuitive user interfaces.', 'li'),
-          formatRichText('3. Agile Development: Iterative sprints using Payload CMS, Next.js, and other tools.', 'li'),
-          formatRichText('4. Client Portal Collaboration: Continuous feedback and milestone tracking via the portal.', 'li'),
-          formatRichText('5. Rigorous Testing: Automated and manual QA to ensure stability and performance.', 'li'),
-          formatRichText('6. Deployment & Handover: Smooth deployment to chosen hosting environment.', 'li'),
-          formatRichText('7. Support & Evolution: Ongoing maintenance and future feature development.', 'li'),
+          formatRichText(
+            '1. Discovery & Strategy: Deep dive into your requirements, goals, and technical needs.',
+            'li',
+          ),
+          formatRichText(
+            '2. Design & UX/UI: Wireframing, prototyping, and designing intuitive user interfaces.',
+            'li',
+          ),
+          formatRichText(
+            '3. Agile Development: Iterative sprints using Payload CMS, Next.js, and other tools.',
+            'li',
+          ),
+          formatRichText(
+            '4. Client Portal Collaboration: Continuous feedback and milestone tracking via the portal.',
+            'li',
+          ),
+          formatRichText(
+            '5. Rigorous Testing: Automated and manual QA to ensure stability and performance.',
+            'li',
+          ),
+          formatRichText(
+            '6. Deployment & Handover: Smooth deployment to chosen hosting environment.',
+            'li',
+          ),
+          formatRichText(
+            '7. Support & Evolution: Ongoing maintenance and future feature development.',
+            'li',
+          ),
         ]),
       },
 
@@ -198,7 +242,10 @@ export const services: (args: ServicesArgs) => RequiredDataFromCollectionSlug<'p
         features: [
           { featureText: 'Infrastructure as Code: Terraform or AWS CloudFormation templates' },
           { featureText: 'Containerization: Docker and Kubernetes configuration' },
-          { featureText: 'Environment Management: Development, staging, and production environments' },
+          {
+            featureText:
+              'Environment Management: Development, staging, and production environments',
+          },
           { featureText: 'Database Migration Systems: Automated schema updates' },
           { featureText: 'Blue/Green Deployments: Zero-downtime deployment strategies' },
           { featureText: 'Performance Monitoring: Implementation of monitoring solutions' },
@@ -255,11 +302,23 @@ export const services: (args: ServicesArgs) => RequiredDataFromCollectionSlug<'p
         content: createRichTextRoot([
           formatRichText('Your Project Hub: The Client Portal Advantage', 'h2'),
           formatRichText('Gain unprecedented visibility and control over your project:'),
-          formatRichText('Project Tracking: Monitor milestones, tasks, and overall progress on your dashboard.', 'li'),
-          formatRichText('Communication: Centralized messaging and feedback channels with our team.', 'li'),
-          formatRichText('Deliverable Approvals: Review and approve project deliverables seamlessly.', 'li'),
+          formatRichText(
+            'Project Tracking: Monitor milestones, tasks, and overall progress on your dashboard.',
+            'li',
+          ),
+          formatRichText(
+            'Communication: Centralized messaging and feedback channels with our team.',
+            'li',
+          ),
+          formatRichText(
+            'Deliverable Approvals: Review and approve project deliverables seamlessly.',
+            'li',
+          ),
           formatRichText('Invoicing & Payments: Manage payments and view invoice history.', 'li'),
-          formatRichText('Documentation Access: Find project documents and resources easily.', 'li'),
+          formatRichText(
+            'Documentation Access: Find project documents and resources easily.',
+            'li',
+          ),
         ]),
       },
 
@@ -272,7 +331,7 @@ export const services: (args: ServicesArgs) => RequiredDataFromCollectionSlug<'p
         richText: createRichTextRoot([
           formatRichText("Let's Discuss Your Specific Needs", 'h2'),
           formatRichText(
-            'Ready to start your custom web application project? Contact us today for a personalized consultation and project quote tailored to your specific requirements.'
+            'Ready to start your custom web application project? Contact us today for a personalized consultation and project quote tailored to your specific requirements.',
           ),
         ]),
         links: [
@@ -289,7 +348,8 @@ export const services: (args: ServicesArgs) => RequiredDataFromCollectionSlug<'p
     ],
     meta: {
       title: 'Web Application Development Services | Lilies Tech Zone',
-      description: 'Specialized web application development services including custom client portals, SaaS platforms, and business tools built with PayloadCMS, Next.js, and TypeScript.',
+      description:
+        'Specialized web application development services including custom client portals, SaaS platforms, and business tools built with PayloadCMS, Next.js, and TypeScript.',
       image: metaImage.id,
     },
   }
