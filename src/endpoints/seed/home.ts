@@ -62,10 +62,10 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
     slug: 'home',
     _status: 'published',
     hero: {
-      type: 'highImpact',
-      title: 'Building Powerful, Custom Web Applications. Streamlined.',
+      type: 'mediumImpact',
+      title: 'Building Powerful, Custom Web Applications.',
       subTagline: 'Your Vision, Expertly Engineered',
-      highlightText: 'Powered by Payload 3.0 & Next.js',
+      highlightText: 'Custom',
       richText: createRichTextRoot([
         formatRichText(
           'We leverage Payload CMS 3.0 and modern technologies like Next.js to deliver high-performance, scalable web solutions tailored to your unique business needs. Experience a transparent development process designed for collaboration.',
@@ -107,12 +107,12 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
             title: 'Custom Solutions',
             description: 'Tailored development for unique business logic.',
           },
-          {
-            iconName: 'SiPayloadcms',
-            iconLibrary: 'fa',
-            title: 'Payload CMS Experts',
-            description: 'Deep expertise in leveraging Payload 3.0 for flexibility.',
-          },
+          // {
+          //   iconName: 'SiPayloadcms',
+          //   iconLibrary: 'fa',
+          //   title: 'Payload CMS Experts',
+          //   description: 'Deep expertise in leveraging Payload 3.0 for flexibility.',
+          // },
           {
             iconName: 'FaChartLine',
             iconLibrary: 'fa',
@@ -322,6 +322,177 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
         ],
       },
 
+      // FAQ Section
+      {
+        blockName: 'Frequently Asked Questions',
+        blockType: 'faq',
+        backgroundColor: 'gray-50',
+        sectionId: 'faqs',
+        title: 'Frequently Asked Questions',
+        question: [
+          {
+            Question: 'What technologies does your platform use?',
+            answer: {
+              root: {
+                type: 'root',
+                children: [
+                  {
+                    type: 'paragraph',
+                    children: [
+                      {
+                        type: 'text',
+                        text: 'Our platform is built on a modern tech stack including Payload CMS 3.0, Next.js, TypeScript, React, and PostgreSQL. We also integrate with popular development tools, version control systems, and cloud providers like AWS, Azure, and Google Cloud.',
+                        version: 1,
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+              },
+            },
+          },
+          {
+            Question: 'How does the client portal work?',
+            answer: {
+              root: {
+                type: 'root',
+                children: [
+                  {
+                    type: 'paragraph',
+                    children: [
+                      {
+                        type: 'text',
+                        text: 'Our client portal provides a customized dashboard showing project progress in non-technical terms. Clients can review work, provide feedback, track milestones, and approve deliverables all in one place. The portal also includes integrated communication channels and simplified invoicing and payment processing.',
+                        version: 1,
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+              },
+            },
+          },
+          {
+            Question: 'What project management features are available?',
+            answer: {
+              root: {
+                type: 'root',
+                children: [
+                  {
+                    type: 'paragraph',
+                    children: [
+                      {
+                        type: 'text',
+                        text: 'Our platform includes a customizable dashboard showing all active projects with status indicators, timeline visualizations, resource management tools for team allocation, workload visualization, capacity planning, and agile methodologies support with sprint planning capabilities.',
+                        version: 1,
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+              },
+            },
+          },
+          {
+            Question: 'How does your platform handle security and compliance?',
+            answer: {
+              root: {
+                type: 'root',
+                children: [
+                  {
+                    type: 'paragraph',
+                    children: [
+                      {
+                        type: 'text',
+                        text: 'Security is our top priority. We implement role-based access control (RBAC), multi-factor authentication, data encryption at rest and in transit, and regular security audits. Our platform complies with GDPR, CCPA, and other regional data protection regulations, with detailed audit logs for all system activities.',
+                        version: 1,
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+              },
+            },
+            links: [
+              {
+                link: {
+                  type: 'custom',
+                  label: 'Security Policy',
+                  url: '/security',
+                  appearance: 'outline',
+                },
+              },
+            ],
+          },
+          {
+            Question: 'How does your AI integration work?',
+            answer: {
+              root: {
+                type: 'root',
+                children: [
+                  {
+                    type: 'paragraph',
+                    children: [
+                      {
+                        type: 'text',
+                        text: 'Our platform leverages AI for multiple aspects of the development process. This includes requirements analysis for project scoping, code generation for common patterns, quality assurance through AI-powered testing, and predictive analytics for project estimation. These AI features help streamline development and improve code quality.',
+                        version: 1,
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+              },
+            },
+            links: [
+              {
+                link: {
+                  type: 'custom',
+                  label: 'AI Features',
+                  url: '/features/ai',
+                  appearance: 'outline',
+                },
+              },
+            ],
+          },
+        ],
+      },
+
       // Final CTA Section
       {
         blockName: 'Final CTA',
@@ -436,7 +607,7 @@ type RichTextNode = {
 }
 
 // Example structure for RichText root
-type RichTextRoot = {
+export type RichTextRoot = {
   root: {
     type: 'root'
     children: RichTextNode[]
@@ -519,7 +690,7 @@ type ArchiveBlock = {
 type LayoutBlock = IconsBlock | FeatureListBlock | TestimonialsBlock | CtaBlock | ArchiveBlock // Add other block types here, e.g. | ContentBlock | MediaBlock
 
 // Extend the Page type slightly for clarity
-type Page = RequiredDataFromCollectionSlug<'pages'> & {
+export type Page = RequiredDataFromCollectionSlug<'pages'> & {
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact'
     title?: string // Added field

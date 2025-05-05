@@ -16,11 +16,16 @@ A PayloadCMS-based website with modern UI components built with TypeScript, Reac
 - **CallToAction**: Modern CTA component with image support and responsive layout
 - **Partners**: Partner listing component
 - **Testimonials**: Customer testimonial display
+- **FAQ**: Collapsible FAQ section with rich text answers and optional links
 
 ## Database
 - PostgreSQL database with PayloadCMS schema
 
 ## Recent Changes
+- Added About page with company vision, development philosophy, and services information
+- Added Services page detailing technology stack and development offerings
+- Added FAQ section to homepage with content from requirements specification
+- Added CallToAction image (light/dark variants) to seed files
 - Enhanced CallToAction component to allow images to extend beyond component height
 - Fixed seeding issues with partner data
 - Added deadlock handling and retry mechanism for database operations
